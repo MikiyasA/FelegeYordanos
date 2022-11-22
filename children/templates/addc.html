@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load crispy_forms_tags %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="{% static 'css/addmem.css' %}?{% now 'U' %}">
+    <link rel="stylesheet" href="{% static 'css/addrc.css' %}?{% now 'U' %}">
+</head>
+<body>
+{% include 'nav.html' %}
+    <!-- forms to add, can be used for book, shelf author or any form -->
+<h2 class="heading">{{heading}}</h2>
+<div class="form">
+    <form method="POST", enctype="multipart/form-data" action="">{% csrf_token %}
+        {{form|crispy}}
+        <input class="btn-save" type="submit" value="Save"/>
+    </form>
+</div>
+</body>
+</html>

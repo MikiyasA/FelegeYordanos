@@ -1,0 +1,293 @@
+form {
+    margin: 60px 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+}
+@media only screen and (max-width: 760px) {
+    form {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media only screen and (max-width: 550px) {
+    form {
+        grid-template-columns: 1fr;
+    }
+}
+input {
+    display: block;
+    width: 90%;
+    height: 26px;
+    border-radius: 10px;
+    border: solid 1px;
+    background-color: white;
+}
+select {
+    width: 90%;
+    height: 33px;
+    border-radius: 10px;
+    border: solid 1px;
+    background-color: white;
+}
+.form div {
+    padding: 5px;
+}
+input.submit{
+    color: #2232323;
+}
+
+.btn-save {
+    background-color: #017253cc;
+    color: white;
+    font-size: 18px;
+    font-weight: bolder;
+    width: 13pc;
+    height: 40px;
+    place-self: center;
+    margin: 20px;
+    /*
+    background-color: #017253cc;
+    color: white;
+    font-size: 18px;
+    font-weight: bolder;
+    width: 10pc;
+    height: 40px;
+    border-radius: 11px;
+    margin-top: 3pc;
+    position: relative;
+    left: 10px;*/
+}
+.btn-save:hover {
+    opacity: 0.7;
+    font-style: oblique;
+}
+
+.help-block {
+    display: none;
+    color: red;
+    font-style: oblique;
+    text-decoration: blink;
+}
+
+.controls label { padding: 1px ; width: 40px; }
+input[type="checkbox" i] {
+    width: 12px;
+    display: inline;
+    height: 12px;
+}
+p[id="error_1_id_idno"]{
+    display: none;
+}
+input[name="idno"]{
+    width: 50%;
+}
+/*
+div[id="div_id_fname"]{
+    width: 39%;
+}
+div[id="div_id_mname"]{
+    width: 30%;
+    position: absolute;
+    margin-top: 4.2pc;
+    margin-left: 28%;
+}
+div[id="div_id_lname"]{
+    width: 30%;
+    position: absolute;
+    margin-top: 4.2pc;
+    margin-left: 58%;
+}
+
+div[id="div_id_mother_name"]{
+    width: 39%;
+}
+div[id="div_id_c_name"]{
+    width: 30%;
+    position: absolute;
+    margin-top: 8.5pc;
+    margin-left: 28%;
+}
+div[id="div_id_c_father_name"]{
+    width: 31%;
+    position: absolute;
+    margin-top: 8.5pc;
+    margin-left: 58%;
+}
+div[id="div_id_phone"]{
+    width: 50%;
+}
+div[id="div_id_email"]{
+    width: 55%;
+    position: absolute;
+    margin-top: 12.7pc;
+    margin-left: 35%;
+}
+div[id="div_id_sex"]{
+    width: 28%;
+}
+div[id="div_id_bday"]{
+    width: 30%;
+    position: absolute;
+    margin-top: 17.3pc;
+    margin-left: 24%;
+}
+div[id="div_id_nationality"]{
+    width: 30%;
+    position: absolute;
+    margin-top: 17.3pc;
+    margin-left: 58%;
+}
+div[id="div_id_status"]{
+    width: 25%;
+}
+div[id="div_id_rid_no"]{
+    width: 25%;
+    position: absolute;
+    margin-top: 21.6pc;
+    margin-left: 17%;
+}
+div[id="div_id_address"]{
+    width: 47%;
+    position: absolute;
+    margin-top: 21.6pc;
+    margin-left: 42%;
+}
+div[id="div_id_city"]{
+    width: 50%;
+}
+div[id="div_id_wereda"]{
+    width: 25%;
+    position: absolute;
+    margin-top: 25.9pc;
+    margin-left: 35%;
+}
+div[id="div_id_house_no"]{
+    width: 26%;
+    position: absolute;
+    margin-top: 25.9pc;
+    margin-left: 61%;
+}
+div[id="div_id_sos_name"]{
+    width: 58%;
+}
+div[id="div_id_sos_phone"]{
+    width: 46%;
+    position: absolute;
+    margin-top: 30.1pc;
+    margin-left: 43%;
+}
+div[id="div_id_education_level"]{
+    width: 55%;
+}
+div[id="div_id_education"]{
+    width: 51%;
+    position: absolute;
+    margin-top: 34.4pc;
+    margin-left: 38%;
+}
+div[id="div_id_job"]{
+    width: 55%;
+}
+div[id="div_id_talent"]{
+    width: 51%;
+    position: absolute;
+    margin-top: 38.6pc;
+    margin-left: 38%;
+}
+div[id="div_id_activity"]{
+    width: 28%;
+}
+div[id="div_id_start_date"]{
+    width: 20%;
+    position: absolute;
+    margin-top: 42.9pc;
+    margin-left: 19%;
+}
+div[id="div_id_kifl"]{
+    width: 51%;
+    position: absolute;
+    margin-top: 42.9pc;
+    margin-left: 38%;
+}
+div[id="div_id_photo"]{
+    width: 132%;
+}
+.help-block input::after {
+    content: "*";
+    color: red;
+}
+
+
+input[name="property_no"]{
+    width: 36%;
+}
+div[id="div_id_property_name"]{
+    width: 40%;
+}
+div[id="div_id_category"]{
+    width: 30%;
+    position: absolute;
+    margin-top: 4.1pc;
+    margin-left: 28%;
+}
+div[id="div_id_type"]{
+    width: 30%;
+    position: absolute;
+    margin-top: 4.1pc;
+    margin-left: 57%;;
+}
+div[id="div_id_price"]{
+    width: 40%;
+}
+div[id="div_id_quantity"]{
+    width: 30%;
+    position: absolute;
+    margin-top: 8.5pc;
+    margin-left: 28%;
+}
+div[id="div_id_unit_mesnt"]{
+    width: 30%;
+    position: absolute;
+    margin-top: 8.5pc;
+    margin-left: 57%;;
+}
+div[id="div_id_condition"]{
+    width: 40%;
+}
+div[id="div_id_purch_date"]{
+    width: 30%;
+    position: absolute;
+    margin-top: 12.9pc;
+    margin-left: 28%;
+}
+div[id="div_id_exp_date"]{
+    width: 30%;
+    position: absolute;
+    margin-top: 12.9pc;
+    margin-left: 57%;;
+}
+div [id="div_id_dikuna"] {
+    width: 45%;
+}
+div [id="div_id_zemari"] {
+    width: 30%;
+    position: absolute;
+    margin-top: 49pc;
+    margin-left: 32%;
+}
+div [id="div_id_photo"]{
+    width: 38%;
+    position: absolute;
+    margin-top: 47.4pc;
+    margin-left: 47%;
+}
+*/
+.alert {
+    background: #ffffff;
+}
+.errorlist ul li {
+    display: block;
+}
+.errorlist {
+    background: #ffffff;
+}

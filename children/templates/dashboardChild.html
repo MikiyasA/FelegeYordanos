@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Member Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/dashmem.css' %}?{% now 'U' %}">
+</head>
+<body>
+{% include 'nav.html' %}
+
+<div class="cont-1">
+    <table>
+        <thead>
+            <thead>
+                <tr>
+                    <th colspan="2" class="heading"><a href="/listMembers">አባላት  <hr>  {{allM}} </a></th>
+                </tr>
+        </thead>
+        <tr>
+            <td>ወንድ</td>
+            <td>ሴት</td>
+        </tr>
+        <tr>
+            <td><a href="/filterMember/ወንድ"><button class="aa">{{male}}</button></td></a>
+            <td><a href="/filterMember/ሴት"><button class="ab">{{female}}</button></td></a>
+        </tr>
+
+        <tr>
+            <td>የሚያገለግል</td>
+            <td>የማያገለግል</td>
+        </tr>
+        <tr>
+            <td><a href="/filterMember/ያገለግላሉ"><button class="ba">{{active}}</button></td></a>
+            <td><a href="/filterMember/አያገለግሉም"><button class="bb">{{inactive}}</button></td></a>
+        </tr>
+    </table>
+</div>
+
+<div class="cont-3">
+    <table>
+
+        <tr>
+            <td>እጩ ዲያቆናት</td>
+            <td>ዲያቆናት</td>
+            <td>እጩ ቀሲስ</td>
+            <td>ቀሲስ</td>
+        </tr>
+        <tr>
+            <td><a href="/filterMember/እጩ ዲያቆን"><button class="db">{{e_diyakon}}</button></a></td>
+            <td><a href="/filterMember/-ዲያቆን"><button class="db">{{diyakon}}</button></a></td>
+            <td><a href="/filterMember/እጩ ቀሲስ"><button class="da">{{e_kesis}}</button></a></td>
+            <td><a href="/filterMember/-ቀሲስ"><button class="da">{{kesis}}</button></a></td>
+        </tr>
+
+    </table>
+</div>
+</body>
+{% include 'footer.html' %}
+
+</html>

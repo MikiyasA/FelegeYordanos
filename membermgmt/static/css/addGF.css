@@ -1,0 +1,12 @@
+div[id="div_id_phone"] {
+    width: unset;
+    position: unset;
+    margin-top: unset;
+}
+
+div[id="div_id_address"] {
+    width: unset;
+    position: unset;
+    margin-top: unset;
+    margin-left: unset;
+}

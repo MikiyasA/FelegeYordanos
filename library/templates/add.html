@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block head  %}
+    <link rel="stylesheet" href="{% static 'css/add.css' %}?{% now 'U' %}">
+{% endblock %}
+
+{% block header %} {% include 'nav.html' %} {% endblock %}
+
+{% block content %}
+ <!-- forms to add, can be used for book, shelf author or any form -->
+<h2>{{heading}}</h2>
+<div class="form">
+    <form method="POST", enctype="multipart/form-data" action="">{% csrf_token %}
+        {{form|crispy}}
+        <input class="btn-save" type="submit" value="Save"/>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block footer %} {% include 'footer.html' %} {% endblock %}

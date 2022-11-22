@@ -1,0 +1,239 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="{% static 'css/listm.css' %}?{% now 'U' %}">
+    <link rel="stylesheet" href="{% static 'css/tab.css' %}?{% now 'U' %}">
+</head>
+<body>
+{% include 'nav.html' %}
+<div class="tbl-title">
+    <div class="message">
+        {% if messages %}
+            <ul class="ul-message">
+                {% for message in messages %}
+                    <li {% if message.tag %} class="{{ message.tag }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <h1>የህጻናት ዝርዝር
+        <a href="addChild"><img class="add" src="{% static 'img/add.png' %}" alt="Add"></a>
+    </h1>
+</div>
+
+<div class="t-container">
+    <div class="search-col">
+        <div class="div-search">
+            <form>
+                <label for="search">መፈለጊያ</label>
+                <input type="text" name="q" id="search" class="search" placeholder="መለያ ቁጥር፣ በስም ...">
+                <button class="btn-search" name="submit" type="submit" >ፈልግ</button>
+            </form>
+        </div>
+        {% for group in request.user.groups.all %}
+        {% if group.name in 'hitsanat, admin' %}
+        <hr>
+        <div class="export">
+            <form method="POST" action="" >{% csrf_token %}
+                {{form|crispy}}
+                <input class="btn-export" type="submit" value="Export"/>
+            </form>
+        </div>
+        <hr>
+        <div class="import">
+            <form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+                {{form_imp|crispy}}
+                <input class="btn-import" type="submit" value="Import"/>
+            </form>
+        </div>
+        <hr>
+        <a class="btn-generate" type="submit" href="{% url 'printAllChildId' %}">Print ID</a>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="table-cont">
+        <div class="tab-cotnr">
+            <div class="tab">
+              <button class="tablinks" onclick="openTab(event, 'All')" id="defaultOpen">ሁሉም</button>
+              <button class="tablinks" onclick="openTab(event, 'First')">ቤተ አረጋዊ</button>
+              <button class="tablinks" onclick="openTab(event, 'Second')">ቤተ ኪዳነምህረት</button>
+              <button class="tablinks" onclick="openTab(event, 'Third')">ቤተ መድኃኔአለም</button>
+              <button class="tablinks" onclick="openTab(event, 'Fourth')">ቤተ ዮሐንስ</button>
+            </div>
+            <div id="All" class="tabcontent">
+                <table class="table">
+                <thead>
+                    <tr>
+                        <th>ተ.ቁ</th>
+                        <th>መለያ ቁጥር</th>
+                        <th>ሙሉ ስም</th>
+                        <th>ክርስትና ስም</th>
+                        <th>እድሜ</th>
+                        <th>ስልክ</th>
+                        <th>ጻታ</th>
+                        <th>ምድብ</th>
+                    </tr>
+                </thead>
+                {% for instance in queryset %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td><a href="{% url 'childDetail' instance.idno %}">{{instance.idno}}</a></td>
+                    <td>{{instance.fname}} {{instance.mname}} {{instance.lname}}</td>
+                    <td>{{instance.c_name}}</td>
+                    <td>{{instance.bday}}</td>
+                    <td>{{instance.phone}}</td>
+                    <td>{{instance.sex}}</td>
+                    <td>{{instance.midb}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            </div>
+            <div id="First" class="tabcontent">
+                <table class="table">
+                <thead>
+                    <tr>
+                        <th>ተ.ቁ</th>
+                        <th>መለያ ቁጥር</th>
+                        <th>ሙሉ ስም</th>
+                        <th>ክርስትና ስም</th>
+                        <th>እድሜ</th>
+                        <th>ስልክ</th>
+                        <th>ጻታ</th>
+                        <th>ምድብ</th>
+                    </tr>
+                </thead>
+                {% for instance in aregawi %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td><a href="{% url 'childDetail' instance.idno %}">{{instance.idno}}</a></td>
+                    <td>{{instance.fname}} {{instance.mname}} {{instance.lname}}</td>
+                    <td>{{instance.c_name}}</td>
+                    <td>{{instance.bday}}</td>
+                    <td>{{instance.phone}}</td>
+                    <td>{{instance.sex}}</td>
+                    <td>{{instance.midb}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            </div>
+            <div id="Second" class="tabcontent">
+                <table class="table">
+                <thead>
+                    <tr>
+                        <th>ተ.ቁ</th>
+                        <th>መለያ ቁጥር</th>
+                        <th>ሙሉ ስም</th>
+                        <th>ክርስትና ስም</th>
+                        <th>እድሜ</th>
+                        <th>ስልክ</th>
+                        <th>ጻታ</th>
+                        <th>ምድብ</th>
+                    </tr>
+                </thead>
+                {% for instance in kidanemhret %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td><a href="{% url 'childDetail' instance.idno %}">{{instance.idno}}</a></td>
+                    <td>{{instance.fname}} {{instance.mname}} {{instance.lname}}</td>
+                    <td>{{instance.c_name}}</td>
+                    <td>{{instance.bday}}</td>
+                    <td>{{instance.phone}}</td>
+                    <td>{{instance.sex}}</td>
+                    <td>{{instance.midb}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            </div>
+            <div id="Third" class="tabcontent">
+                <table class="table">
+                <thead>
+                    <tr>
+                        <th>ተ.ቁ</th>
+                        <th>መለያ ቁጥር</th>
+                        <th>ሙሉ ስም</th>
+                        <th>ክርስትና ስም</th>
+                        <th>እድሜ</th>
+                        <th>ስልክ</th>
+                        <th>ጻታ</th>
+                        <th>ምድብ</th>
+                    </tr>
+                </thead>
+                {% for instance in medhanealem %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td><a href="{% url 'childDetail' instance.idno %}">{{instance.idno}}</a></td>
+                    <td>{{instance.fname}} {{instance.mname}} {{instance.lname}}</td>
+                    <td>{{instance.c_name}}</td>
+                    <td>{{instance.bday}}</td>
+                    <td>{{instance.phone}}</td>
+                    <td>{{instance.sex}}</td>
+                    <td>{{instance.midb}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            </div>
+            <div id="Fourth" class="tabcontent">
+                <table class="table">
+                <thead>
+                    <tr>
+                        <th>ተ.ቁ</th>
+                        <th>መለያ ቁጥር</th>
+                        <th>ሙሉ ስም</th>
+                        <th>ክርስትና ስም</th>
+                        <th>እድሜ</th>
+                        <th>ስልክ</th>
+                        <th>ጻታ</th>
+                        <th>ምድብ</th>
+                    </tr>
+                </thead>
+                {% for instance in yohans %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td><a href="{% url 'childDetail' instance.idno %}">{{instance.idno}}</a></td>
+                    <td>{{instance.fname}} {{instance.mname}} {{instance.lname}}</td>
+                    <td>{{instance.c_name}}</td>
+                    <td>{{instance.bday}}</td>
+                    <td>{{instance.phone}}</td>
+                    <td>{{instance.sex}}</td>
+                    <td>{{instance.midb}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function openTab(evt, tabName) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+
+}
+</script>
+<script>document.getElementById("defaultOpen").click();</script>
+</body>
+{% include 'footer.html' %}
+</html>

@@ -1,0 +1,52 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Children Detail</title>
+    <link rel="stylesheet" href="{% static 'css/detail.css' %}?{% now 'U' %}">
+    <link rel="stylesheet" href="{% static 'css/detail_ch.css' %}?{% now 'U' %}">
+</head>
+<body>
+{% include 'nav.html' %}
+{% for instance in allqueryset %}
+<h1>የአባሉ ዝርዝር መረጃ</h1>
+<div class="de-container">
+    <table class="split">
+        <tbody class="t-body">
+
+            <tr>
+                <td class="left">
+                    <div class="fix">
+                        <a class="btn-generate" type="submit" href="{% url 'printChildId' instance.idno %}">Print ID</a>
+                        <img class="pp" src="{{instance.photo.url}}" alt="የአባሉ ፎቶ">
+                        <br><a href="{% url 'childUpdate' instance.idno %}"><h3>{{instance.idno}}</h3></a>
+                        <h3>{{instance.fname}} {{instance.mname}} {{instance.lname}}</h3>
+                        <h3>{{instance.c_name}}</h3>
+                        <h3>{{instance.phone}}</h3>
+                    </div>
+                </td>
+
+                <td class="right">
+                    <div class="detail">
+                        <div class=""><label>የእናት ስም</label><h3>{{instance.mother_name}}</h3></div>
+                        <div class=""><label>ጾታ</label><h3>{{instance.sex}}</h3></div>
+                        <div class=""><label>የትውልድ ቀን</label><h3>{{instance.bday}}</h3></div>
+                        <div class=""><label>ዜግነት</label><h3>{{instance.nationality}}</h3></div>
+                        <div class=""><label>ምድብ</label><h3>{{instance.midb}}</h3></div>
+                        <div class=""><label>አድራሻ </label><h3>{{instance.address}} {{instance.city}} {{instance.woreda}} {{instance.house_no}}</h3></div>
+                        <div class=""><label>የአሳዳጊ ስም</label><h3>{{instance.fam_name}}</h3></div>
+                        <div class=""><label>የአሳዳጊ ስልክ </label><h3>{{instance.fam_phone}}</h3></div>
+                        <div class=""><label>የትምህርት ደረጃ</label><h3>{{instance.education_level}}</h3></div>
+                        <div class=""><label>ትምህርት የጀመሩበት ቀን</label><h3>{{instance.start_date}}</h3></div>
+                        <div class=""><label>ክህነት</label><h3>{{instance.dikuna}}</h3></div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+{% endfor %}
+</div>
+</body>

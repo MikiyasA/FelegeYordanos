@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block head  %}
+    <link rel="stylesheet" href="{% static 'css/detail.css' %}?{% now 'U' %}">
+{% endblock %}
+
+{% block header %} {% include 'nav.html' %} {% endblock %}
+
+{% block content %}
+{% for instance in allqueryset %}
+<h1>የአባሉ ዝርዝር መረጃ</h1>
+<div class="de-container">
+    <table class="split">
+        <tbody class="t-body">
+
+            <tr>
+                <td class="left">
+                    <div class="fix">
+                        <a class="btn-generate" type="submit" href="{% url 'printId' instance.idno %}">Print ID</a>
+                        <img class="pp" src="{{instance.photo.url}}" alt="የአባሉ ፎቶ">
+                        <br><a href="{% url 'updateMembers' instance.idno %}"><h3>{{instance.idno}}</h3></a>
+                        <h3>{{instance.fname}} {{instance.mname}} {{instance.lname}}</h3>
+                        <h3>{{instance.c_name}}</h3>
+                        <h3>{{instance.phone}}</h3>
+                        <h3>{{instance.email}}</h3>
+                    </div>
+                </td>
+
+                <td class="right">
+                    <div>
+                        <div class="c11"><label>የመታወቂያ ቁጥር</label><h3>{{instance.rid_no}}</h3></div>
+                        <div class="c12"><label>የእናት ስም</label><h3>{{instance.mother_name}}</h3></div>
+                        <div class="c13"><label>የንሰሃ አባት ስም</label><h3>{{instance.c_father_name}}</h3></div>
+                        <div class="c21"><label>ጾታ</label><h3>{{instance.sex}}</h3></div>
+                        <div class="c22"><label>የትውልድ ቀን</label><h3>{{instance.bday}}</h3></div>
+                        <div class="c23"><label>ዜግነት</label><h3>{{instance.nationality}}</h3></div>
+                        <div class="c31"><label>የጋብቻ ሁኔታ</label><h3>{{instance.status}}</h3></div>
+                        <div class="c32"><label>አድራሻ </label><h3>{{instance.address}} {{instance.city}} {{instance.woreda}} {{instance.house_no}}</h3></div>
+                        <div class="c33"><label>የቅርብ የተጠሪ ስም</label><h3>{{instance.sos_name}}</h3></div>
+                        <div class="c41"><label>የቅርብ የተጠሪ ስልክ </label><h3>{{instance.sos_phone}}</h3></div>
+                        <div class="c42"><label>የትምህርት ደረጃ</label><h3>{{instance.education_level}}</h3></div>
+                        <div class="c43"><label>የተመረቁበት ዘርፍ</label><h3>{{instance.education}}</h3></div>
+                        <div class="c51"><label>ስራ</label><h3>{{instance.job}}</h3></div>
+                        <div class="c52"><label>ልዩ ሞያ</label><h3>{{instance.talent}}</h3></div>
+                        <div class="c53"><label>የአገልግሎት ሁኔታ</label><h3>{{instance.activity}}</h3></div>
+                        <div class="c61"><label>የሚያገለግሉበት ክፍል</label><h3>{{instance.kifl}}</h3></div>
+                        <div class="c62"><label>ክህነት</label><h3>{{instance.dikuna}}</h3></div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+
+</div>
+{% endblock %}
+
+{% block footer %} {% include 'footer.html' %} {% endblock %}

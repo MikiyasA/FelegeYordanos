@@ -1,0 +1,25 @@
+.heading{
+    text-align: center;
+    color: #053835e8;
+}
+form {
+    display: inline-block;
+    width: 90%;
+}
+.form div {
+    width: 20pc;
+    padding: 5px;
+    display: inline-block;
+}
+input {
+    border-radius: 7px;
+}
+.btn-save {
+    border-radius: 10px;
+    margin-left: 60%;
+}
+input[name="photo-clear"] {
+    width: 15px;
+    height: auto;
+    display: inline-block;
+}

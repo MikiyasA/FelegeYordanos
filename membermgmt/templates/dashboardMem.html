@@ -1,0 +1,61 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block head  %}
+    <link rel="stylesheet" href="{% static 'css/dashmem.css' %}?{% now 'U' %}">
+{% endblock %}
+
+{% block header %} {% include 'nav.html' %} {% endblock %}
+
+{% block content %}
+<div class="cont-1">
+    <table>
+        <thead>
+            <thead>
+                <tr>
+                    <th colspan="2" class="heading"><a href="/listMembers">አባላት  <br> {{allM}} </a></th>
+                </tr>
+        </thead>
+        <tr>
+            <td>ወንድ</td>
+            <td>ሴት</td>
+        </tr>
+        <tr>
+            <td><a href="/filterMember/ወንድ"><button class="aa">{{male}}</button></a></td>
+            <td><a href="/filterMember/ሴት"><button class="ab">{{female}}</button></a></td>
+        </tr>
+
+        <tr>
+            <td>የሚያገለግል</td>
+            <td>የማያገለግል</td>
+        </tr>
+        <tr>
+            <td><a href="/filterMember/ያገለግላሉ"><button class="ba">{{active}}</button></a></td>
+            <td><a href="/filterMember/አያገለግሉም"><button class="bb">{{inactive}}</button></a></td>
+        </tr>
+    </table>
+</div>
+
+<div class="cont-3">
+    <table>
+
+        <tr>
+            <td>እጩ ዲያቆናት</td>
+            <td>ዲያቆናት</td>
+            <td>እጩ ቀሲስ</td>
+            <td>ቀሲስ</td>
+        </tr>
+        <tr>
+            <td><a href="/filterMember/እጩ ዲያቆን"><button class="db">{{e_diyakon}}</button></a></td>
+            <td><a href="/filterMember/-ዲያቆን"><button class="db">{{diyakon}}</button></a></td>
+            <td><a href="/filterMember/እጩ ቀሲስ"><button class="da">{{e_kesis}}</button></a></td>
+            <td><a href="/filterMember/-ቀሲስ"><button class="da">{{kesis}}</button></a></td>
+        </tr>
+
+    </table>
+</div>
+{% endblock %}
+
+{% block footer %} {% include 'footer.html' %} {% endblock %}

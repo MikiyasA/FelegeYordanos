@@ -1,0 +1,36 @@
+input[name="reason"] {
+    height: 7pc;
+    width: 196%;
+}
+@media only screen and (max-width: 550px) {
+    input[name="reason"] {
+        width: 90%;
+    }
+}
+/*
+div[id="div_id_name"]{
+    width: 100%;
+}
+div[id="div_id_kifl"]{
+    width: 100%;
+    position: unset;
+    margin-top: 0;
+    margin-left: 0;
+}
+div[id="div_id_start_date"]{
+    width: 45%;
+    position: unset;
+    margin-top: 0;
+    margin-left: 0;
+}
+div[id="div_id_end_date"]{
+    width: 31%;
+    position: absolute;
+    margin-top: 8.8pc;
+    margin-left: 34%;
+}
+
+}
+.btn-save{
+    margin-left: 63%;
+}

@@ -1,0 +1,74 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block head  %}
+    <link rel="stylesheet" href="{% static 'css/dashmem.css' %}?{% now 'U' %}">
+{% endblock %}
+
+{% block header %} {% include 'nav.html' %} {% endblock %}
+
+{% block content %}
+<div class="cont-1">
+    <table>
+        <thead>
+            <thead>
+                <tr>
+                    <th colspan="2" class="heading"><a href="/listProperty">ንብረቶች <br> {{allP}}</a></th>
+
+                </tr>
+        </thead>
+        <tr>
+            <td>ቆሚ</td>
+            <td>አላቂ</td>
+        </tr>
+        <tr>
+            <td><a href="/filterProperty/ቆሚ"><button class="aa">{{rot}}</button></a></td>
+            <td><a href="{% url 'filterProperty' 'አላቂ' %} "><button class="ab">{{cons}}</button></a></td>
+        </tr>
+    </table>
+</div>
+<div class="cont-2">
+    <table>
+        <tr>
+            <td>የኤሌክትሮኒክስ/የአይቲ እቃዎች</td>
+            <td>የጽህፈት መሳሪያቆች</td>
+            <td>የቢሮ እቃዎች</td>
+            <td>የድግስ እቃዎች</td>
+            <td>ምግብ ነክ ቁሶች</td>
+            <td>ንዋየ ቅድሳት </td>
+
+        </tr>
+        <tr>
+            <td><a href="{% url 'filterProperty' 'የኤሌክትሮኒክስ የአይቲ እቃዎች' %}"><button class="ba">{{electronics}}</button></a></td>
+            <td><a href="/filterProperty/የጽህፈት መሳሪያቆች"><button class="ba">{{stationary}}</button></a></td>
+            <td><a href="/filterProperty/የቢሮ እቃዎች"><button class="ba">{{furniture}}</button></a></td>
+            <td><a href="/filterProperty/የድግስ እቃዎች"><button class="bb">{{digs}}</button></a></td>
+            <td><a href="/filterProperty/ምግብ ነክ ቁሶች"><button class="bc">{{food}}</button></a></td>
+            <td><a href="/filterProperty/ንዋየ ቅድሳት"><button class="bc">{{material}}</button></a></td>
+        </tr>
+    </table>
+</div>
+
+<div class="cont-3">
+    <table>
+        <tr>
+            <td>አዲስ</td>
+            <td>ያገለገለ</td>
+            <td>አሮጌ</td>
+            <td>የሚወገድ</td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'filterProperty' 'አዲስ' %}"><button class="ca">{{new}}</button></a></td>
+            <td><a href="{% url 'filterProperty' 'ያገለገለ' %}"><button class="cb">{{used}}</button></a></td>
+            <td><a href="{% url 'filterProperty' 'አሮጌ' %}"><button class="cc">{{old}}</button></a></td>
+            <td><a href="{% url 'filterProperty' 'የሚወገድ' %}"><button class="cc">{{tbscrap}}</button></a></td>
+        </tr>
+    </table>
+</div>
+
+
+{% endblock %}
+
+{% block footer %} {% include 'footer.html' %} {% endblock %}

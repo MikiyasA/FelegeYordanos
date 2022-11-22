@@ -1,0 +1,79 @@
+.post-btn {
+  margin-top: 4pc;
+  display: inline-flex;
+  align-items: center;
+}
+.btn-add {
+  border-radius: 10px;
+  height: 30px;
+  background: #ffffffa3;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  padding: 5px 15px;
+}
+.container {
+    display: flex;
+    background-color: #cfcbc259;
+    border-radius: 10px;
+    margin-top: 23px;
+}
+
+.cont-post {
+    width: 70%;
+    margin-top: 23px;
+    margin-left: 21px;
+
+}
+.post {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    justify-content: start;
+}
+.post h2 {
+    color: #061f2cd9;
+    text-decoration-line: underline;
+    justify-self: self-start;
+    margin-left: 35px;
+}
+.post img {
+    width: 60%;
+}
+.post p {
+    text-align: justify;
+    padding: 3px 5px;
+    background-color: #cfcbc273;
+    border-radius: 12px;
+}
+
+.cont-new-book {
+    width: 25%;
+    border-radius: 25px;
+    margin-left: 30px;
+    border-left: solid 1px;
+}
+.new-book {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    justify-content: start;
+    margin-left: 20px;
+}
+.new-book label {
+    text-align: start;
+    font-size: 14px;
+    width: 100%;
+}
+.new-book  img {
+    width: 70%;
+    justify-self: start;
+}
+.cont-new-book h3{
+    margin: 10px;
+    text-align: start;
+    color: #625f55;
+    font-style: oblique;
+}

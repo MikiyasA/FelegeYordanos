@@ -1,0 +1,89 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block head  %}
+    <link rel="stylesheet" href="{% static 'css/listm.css' %}?{% now 'U' %}">
+{% endblock %}
+
+{% block header %} {% include 'nav.html' %} {% endblock %}
+
+{% block content %}
+<div class="tbl-title">
+    <div class="message">
+        {% if messages %}
+            <ul class="ul-message">
+                {% for message in messages %}
+                    <li {% if message.tag %} class="{{ message.tag }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <h1>የፈቃድ ዝርዝር
+        <a href="/addFekad/"><img class="add" src="{% static 'img/add.png' %}" alt="Add"></a>
+    </h1>
+</div>
+
+<div class="t-container">
+
+    <div class="search-col">
+        <div class="div-search">
+            <form>
+                <label for="search">መፈለጊያ</label>
+                <input type="text" name="q" id="search" class="search" placeholder="ሚጠይቁበት ክፍል ምክንያት ...">
+                <button class="btn-search" name="submit" type="submit" >ፈልግ</button>
+            </form>
+        </div>
+        <hr>
+ <!----       <div class="export">
+            <form method="POST" action="">{% csrf_token %}
+                {{form|crispy}}
+                <input class="btn-export" type="submit" value="Export"/>
+            </form>
+        </div>
+        <hr> -->
+    </div>
+    <div class="table-cont">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ተ.ቁ</th>
+                    {% for group in request.user.groups.all %}
+                    {% if group.name == "fekaj" %}
+                    <th>መለያ ቁጥር</th>
+                    {% endif %}
+                    {% endfor %}
+                    <th>ስም እና መላያ ቁጥር</th>
+                    <th>ፈቃድ የሚጠይቁበት ክፍል</th>
+                    <th>ፈቃድ የሚጠየቁበት ቀን</th>
+                    <th>ፈቃድ የሚጀምርበት ቀን</th>
+                    <th>ፈቃድ የሚያበቃበት ቀን</th>
+                    <th>የፈቃዱ ምክንያት</th>
+                    <th>ምርመራ</th>
+                </tr>
+            </thead>
+            {% for instance in queryset %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                {% for group in request.user.groups.all %}
+                {% if group.name == "fekaj" %}
+                <td><a href="{% url 'updateFekad' instance.id %}">{{instance.id|stringformat:"04d"}}</a></td>
+                {% endif %}
+                {% endfor %}
+                <td>{{instance.name}}</a></td>
+                <td>{{instance.kifl}}</td>
+                <td>{{instance.request_date}}</td>
+                <td>{{instance.start_date}}</td>
+                <td>{{instance.end_date}}</td>
+                <td>{{instance.reason}}</td>
+                <td>{{instance.approval}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %} {% include 'footer.html' %} {% endblock %}

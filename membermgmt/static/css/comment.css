@@ -1,0 +1,26 @@
+.form {
+    margin-top: 5pc;
+}
+
+div[id="div_id_type"] {
+    width: 45%;
+    position: unset;
+    margin-top: unset;
+    margin-left: unset;
+}
+
+div[id="div_id_criticality"] {
+    width: 35%;
+    position: absolute;
+    margin-top: 0pc;
+    margin-left: 21.6pc;
+}
+input[name="comment"] {
+    height: 7pc;
+}
+.btn-save {
+    width: 20%;
+    margin-left: 70%;
+    height: 44px;
+    margin-top: 1pc;
+}

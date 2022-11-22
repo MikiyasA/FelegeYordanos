@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% load crispy_forms_tags %}
+{% load static %}
+<html lang="am">
+<head>
+    <meta charset="UTF-8">
+    <title>Member ID</title>
+    <link rel="stylesheet" href="{% static 'css/memid.css' %}?{% now 'U' %}">
+</head>
+<body>
+
+<style>
+    @page {
+        size: a7 landscape;
+        margin: 0.3cm;
+        margin-top: 1cm;
+        @top-center{
+            width: 100%
+            }
+    }
+</style>
+{% for instance in allqueryset %}
+<div class="id-container">
+    <div class="heading">
+        <div class="id-logo">
+            <img id="id-menu" class="id-logo" src="/static/img/logo.jpg" alt="Logo">
+        </div>
+        <div class="photo">
+            <img class="pp" src="{{instance.photo.url}}" alt="የአባሉ ፎቶ">
+        </div>
+        <div class="title">
+            <h3>የቦሌ ደብረሳሌም መድኃኔዓለም መጥምቁ ቅዱስ ዩሐንስ ወአቡነ አረጋዊ ካቴድራል</h3>
+            <h3>ፈለገ ዮርዳኖስ ሰንበት ትምህርት ቤት</h3>
+            <h3>የአባላት መታወቂያ ካርድ</h3>
+        </div>
+    </div>
+    <hr>
+    <div class="content">
+        <div class="aa">
+            <div class="div-name">
+                <label class="lbl-name">ሙሉ ስም: </label>
+                <label class="value">{{instance.fname}} {{instance.mname}} {{instance.lname}}</label>
+            </div>
+            <div class="div-id">
+                <label class="lbl-id">መለያ ቁጥር: </label>
+                <label class="value">{{instance.idno}}</label>
+            </div>
+            <div class="div-cname">
+                <label class="lbl-cname">ክርስትና ስም: </label>
+                <label class="value">{{instance.c_name}}</label>
+            </div>
+            <div class="div-phone">
+                <label class="lbl-phone">ስልክ: </label>
+                <label class="value">{{instance.phone}}</label>
+            </div>
+            <div class="div-address">
+                <label class="lbl-addr">አድራሻ: </label>
+                <label class="value">{{instance.address}}</label>
+                <label class="lbl-city">ክ/ከተማ: </label>
+                <label class="value">{{instance.city}}</label>
+                <label class="lbl-wereda">ወረዳ: </label>
+                <label class="value">{{instance.wereda}}</label>
+                <label class="lbl-hno">የቤት ቁጥር: </label>
+                <label class="value">{{instance.house_no}}</label>
+            </div>
+            <div class="div-activity">
+                <label class="lbl-activity">የሚያገለግሉበት ክፍል: </label>
+                <label class="value">{{instance.kifl}}</label>
+            </div>
+            <div class="div-print-date">
+                <label class="print-date">የተሰጠበት ቀን: </label>
+                <label class="value">{{print_date|date:"d-M-Y"}}</label>
+            </div>
+            <div class="div-exp-date">
+                <label class="exp-date">የሚያበቃበት ቀን: </label>
+                <label class="value">{{exp_date|date:"d-M-Y"}}</label>
+            </div>
+            <div class="div-mess">
+                <label class="lbl-mess">ማስታወቂያ: </label>
+                <p><strong>ይህ መታወቂያ ለቤተክርስቲያን አገልግሎት ብቻ ሚውል ነወ።</strong></p>
+                <p>ይህ መታወቂያ የሚያገለግለው ለአንድ አመት ብቻ ነወ።</p>
+                <p>በወቅቱ ካልታደሰ አገልግሎት አይሰጥም።</p>
+                <p>ወድቆ ቢገግኝ በተጠቀሰው ስልክ ይደውሉ ወይም የሰንበት ትምህርትቤቱ ቢሮ በመምጣት ያስረክቡ።</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}

@@ -1,0 +1,66 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block head  %}
+    <link rel="stylesheet" href="{% static 'css/listm.css' %}?{% now 'U' %}">
+{% endblock %}
+
+{% block header %} {% include 'nav.html' %} {% endblock %}
+
+{% block content %}
+
+<div class="tbl-title">
+    <div class="message">
+        {% if messages %}
+            <ul class="ul-message">
+                {% for message in messages %}
+                    <li {% if message.tag %} class="{{ message.tag }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <h1>የንሰሃ አባቶች ዝርዝር
+        <a href="/addGodFather"><img class="add" src="{% static 'img/add.png' %}" alt="Add"></a>
+    </h1>
+</div>
+
+<div class="t-container">
+
+    <div class="search-col">
+        <div class="search">
+            <form method="POST" action="">{% csrf_token %}
+                {{form|crispy}}
+                <input class="btn-search" type="submit" value="Search"/>
+            </form>
+        </div>
+    </div>
+    <div class="table-cont">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ተ.ቁ</th>
+                    <th>ሙሉ ስም</th>
+                    <th>ስልክ</th>
+                    <th>አድራሻ</th>
+                    <th>የሚያገለግሉበት ደብር</th>
+                </tr>
+            </thead>
+            {% for instance in queryset %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td><a href="{% url 'updateGodFather' instance.name %}">{{instance.name}}</a></td>
+                <td>{{instance.phone}}</td>
+                <td>{{instance.address}}</td>
+                <td>{{instance.debr}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block footer %} {% include 'footer.html' %} {% endblock %}

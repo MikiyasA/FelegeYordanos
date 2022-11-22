@@ -1,0 +1,49 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block head  %}
+        <link rel="stylesheet" href="{% static 'css/about.css' %}?{% now 'U' %}">
+{% endblock %}
+
+{% block header %} {% include 'nav.html' %} {% endblock %}
+
+{% block content %}
+<div class="message">
+        {% if messages %}
+            <ul class="ul-message">
+                {% for message in messages %}
+                    <li {% if message.tag %} class="{{ message.tag }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+</div>
+<div class="cont">
+    <h1>የፈለገ ዮርዳኖስ ሰንበት ትምህርት ቤት የመረጃ ቁአት</h1>
+    <p>ይህ ቁአት በፈለገ ዮርዳኖስ ሰንበት ትምህርት ቤት የመረጃ ጥበባት ወመዛግብት እና ድምፅ ወምስል ክፍል አማካኝነት የተገነባ ሲሆን ሙሉ ፍቃዱ በሰ/ቤቱ ስር ነው።</p>
+    <div class="dev">
+        <button class="btn-ab" onclick="show()">ሰለ አበልጻጊዎች</button>
+        <div class="about-dev" id="about-dev">
+            <h4> ኮሚቴዎች</h4>
+            <h5>ናትናኤል ጥላሁን - 0911727802</h5>
+            <h5>ለይኩን ወልደሰማያት - 0910618916</h5>
+            <h5>ሚኪያስ አደሬ - 0921162566</h5>
+            <h4> ያበለጸገው</h4>
+            <h5>ሚኪያስ አደሬ - 0921162566</h5>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+<script>
+    function show() {
+        document.getElementById('about-dev')
+        .style.display = "block";
+        }
+</script>
+{% endblock %}

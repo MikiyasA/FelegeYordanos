@@ -1,0 +1,89 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block head  %}
+    <link rel="stylesheet" href="{% static 'css/listm.css' %}?{% now 'U' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}?{% now 'U' %}">
+{% endblock %}
+
+{% block header %} {% include 'nav.html' %} {% endblock %}
+
+{% block content %}
+
+<div class="tbl-title">
+    <div class="message">
+        {% if messages %}
+            <ul class="ul-message">
+                {% for message in messages %}
+                    <li {% if message.tag %} class="{{ message.tag }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <h1>የንብረት ዝርዝር
+        <a href="/addProperty"><img class="add" src="{% static 'img/add.png' %}" alt="Add"></a>
+    </h1>
+</div>
+
+<div class="t-container">
+    <div class="search-col">
+        <div class="div-search">
+            <form>
+                <label for="search">መፈለጊያ</label>
+                <input type="text" name="q" id="search" class="search" placeholder="መለያ ቁጥር፣ በስም ...">
+                <button class="btn-search" name="submit" type="submit" >ፈልግ</button>
+            </form>
+        </div>
+        <hr>
+        <div class="export">
+            <form method="POST" action="" >{% csrf_token %}
+                {{ps_form|crispy}}
+                <input class="btn-export" type="submit" value="Export"/>
+            </form>
+        </div>
+        <hr>
+        <div class="import">
+            <form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+                {{form_imp|crispy}}
+                <input class="btn-import" type="submit" value="Import"/>
+            </form>
+        </div>
+    </div>
+
+    <div class="table-cont">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ተ.ቁ</th>
+                    <th>የንብረት ቁጥር</th>
+                    <th>የንብረቱ ስም</th>
+                    <th>ዘርፍ</th>
+                    <th>ቆይታ</th>
+                    <th>ዋጋ</th>
+                    <th>ብዛት</th>
+                    <th>ይዞታ</th>
+                    <th>የአገልግሎት ማብቂያ ጊዜ</th>
+                </tr>
+            </thead>
+            {% for instance in queryset %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td><a href="{% url 'updateProperty' instance.property_no %}">{{instance.property_no}}</a></td>
+                <td>{{instance.property_name}}</td>
+                <td>{{instance.category}}</td>
+                <td>{{instance.type}}</td>
+                <td>{{instance.price}}</td>
+                <td>{{instance.quantity}} {{instance.unit_mesnt}}</td>
+                <td>{{instance.condition}}</td>
+                <td>{{instance.exp_date}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %} {% include 'footer.html' %} {% endblock %}

@@ -1,0 +1,118 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/nav.css' %}?{% now 'U' %}">
+
+<div class="container">
+        <div>
+            <div class="logo"><a style="width: fit-content" href="{% url 'homepage' %}"><img class="alogo" src="{% static 'img/logo.jpg' %}" alt="Logo"></a> </div>
+            <img id="id-menu" class="menu" src="{% static 'img/menu.svg' %}" alt="Menu">
+        </div>
+        <nav>
+            <img id="id-close" class="close" src="{% static 'img/close.svg' %}" alt="close">
+            {% if request.user.is_authenticated %}
+
+           <div id="link" class="link">
+                <ul class="primary">
+                    {% for group in request.user.groups.all %}
+                    {% if group.name == "amerar" %}
+                    <li><a href="/">Dashbord</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% for group in request.user.groups.all %}
+                    {% if group.name == "leabalat" %}
+                    <li><a href="/memberDashboard">የአባላት ክትትል</a>
+                        <ul class="sublink">
+                            <li><a href="/listMembers"> የአባላት ዝርዝር   </a></li>
+                            <li><a href="/addMembers">የአባላት ምዝገባ</a></li>
+                            <li><a href="/listGodFather">የንሰሃ አባት ዝርዝር</a></li>
+                            <li><a href="/addGodFather">የንሰሃ አባት ምዝገባ</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                    {% for group in request.user.groups.all %}
+                    {% if group.name == "lenibret" %}
+                    <li><a href="/propertyDashboard">የንብረት ክትትል</a>
+                        <ul class="sublink">
+                            <li><a href="/listProperty">የንብረት ዝርዝር</a></li>
+                            <li><a href="/addProperty">የንብረት ምዝገባ</a></li>
+                            <li><a href="#">ንብረት መስጫ</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                    {% for group in request.user.groups.all %}
+                    {% if group.name == "admin" %}
+                    <li><a href="#">የኮርስ ተማሪ ክትትል</a>
+                        <ul class="sublink">
+                            <li><a href="/listStudent">የኮርስ ተማሪ ዝርዝር</a></li>
+                            <li><a href="/addStudent">የኮርስ ተማሪ ምዝገባ</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                    {% for group in request.user.groups.all %}
+                    {% if group.name == "admin" %}
+                    <li><a href="{% url 'children' %}">የህጻናት ክትትል</a>
+                        <ul class="sublink">
+                            <li><a href="{% url 'listChild' %}">የህጻናት ተማሪ ዝርዝር</a></li>
+                            <li><a href="{% url 'addChild' %}">የህጻናት ተማሪ ምዝገባ</a></li>
+                            <li><a href="{% url 'addCourse' %}">የህጻናት ትምህርት ምዝገባ</a></li>
+                            <li><a href="{% url 'listCourse' %}">የህጻናት ትምህርት ዝርዝር</a></li>
+                            <li><a href="{% url 'addMark' %}">የህጻናት ተማሪዎች ውጤት መስጫ</a></li>
+                            <li><a href="{% url 'listMark' %}">የህጻናት ተማሪዎች ውጤት ዝርዝር</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                    {% for group in request.user.groups.all %}
+                    {% if group.name == "lemezmur" %}
+                    <li><a href="/zemariyan">ዘማርያን</a>
+                        <ul class="sublink">
+                            <li><a href="/zemariyan"> ዝርዝር</a></li>
+                        <!--    <li><a href=""> ምዝገባ</a></li> -->
+                        </ul>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                    <li><a href="/library/container">ቤተ መጻህፍት</a>
+
+                    </li>
+                    <li><a href="">ፈቃድ</a>
+                        <ul class="sublink">
+                            <li><a href="/listFekad">ፈቃድ ዝርዝር</a></li>
+                            <li><a href="/addFekad">ፈቃድ መጠየቂያ</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                    {% if request.user.is_authenticated %}
+                    <li class="user"><a href="">{{user}}</a>
+                        <ul class="sublink-user">
+                            <li><a href="/addComment" class="com">አስተያየት</a></li>
+                            <li><a href="/about" class="about">ስለ</a></li>
+                            <li><a href="/accounts/logout" class="btn-logout">LogOut</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li class="login"><a href="/accounts/login">Login</a></li>
+                    {% endif %}
+                </ul>
+
+                </ul>
+            </div>
+            </nav>
+
+    <script>
+        const menuBtn = document.getElementById('id-menu')
+              nav = document.querySelector('nav')
+              closeBtn = document.getElementById('id-close');
+
+        menuBtn.addEventListener('click', () => {
+                nav.classList.add('menu-btn');
+            })
+
+        closeBtn.addEventListener('click', () => {
+                nav.classList.remove('menu-btn');
+            })
+    </script>
+</div>
+

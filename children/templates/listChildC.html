@@ -1,0 +1,78 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="{% static 'css/listm.css' %}?{% now 'U' %}">
+    <link rel="stylesheet" href="{% static 'css/tab.css' %}?{% now 'U' %}">
+</head>
+<body>
+{% include 'nav.html' %}
+<div class="tbl-title">
+    <div class="message">
+        {% if messages %}
+            <ul class="ul-message">
+                {% for message in messages %}
+                    <li {% if message.tag %} class="{{ message.tag }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <h1>የህጻናት ትምህርቶች ዝርዝር
+        <a href="addCourse"><img class="add" src="{% static 'img/add.png' %}" alt="Add"></a>
+    </h1>
+</div>
+
+<div class="t-container">
+    <div class="search-col">
+        <div class="div-search">
+            <form>
+                <label for="search">መፈለጊያ</label>
+                <input type="text" name="q" id="search" class="search" placeholder="መለያ ቁጥር፣ በስም ...">
+                <button class="btn-search" name="submit" type="submit" >ፈልግ</button>
+            </form>
+        </div>
+        {% for group in request.user.groups.all %}
+        {% if group.name in 'hitsanat, admin' %}
+        <hr>
+        <div class="export">
+            <form method="POST" action="" >{% csrf_token %}
+                {{form|crispy}}
+                <input class="btn-export" type="submit" value="Export"/>
+            </form>
+        </div>
+        <hr>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <div class="table-cont">
+        <div class="tab-cotnr">
+                <table class="table">
+                <thead>
+                    <tr>
+                        <th>ተ.ቁ</th>
+                        <th>የትምህርቱ መለያ</th>
+                        <th>የትምህርቱ ስም</th>
+                        <th>ትምህርቱን የሚወስዱ ምድቦች</th>
+                        <th>የትምህርቱ መርጃ መጻህፍት</th>
+                    </tr>
+                </thead>
+                {% for instance in queryset %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{instance.course_id}}</td>
+                    <td>{{instance.name}}</td>
+                    <td>{{instance.lemidb}}</td>
+                    <td><a href="{{instance.attachment.url}}">{{instance.attachment}}</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+{% include 'footer.html' %}
+</html>

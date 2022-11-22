@@ -1,0 +1,97 @@
+body {
+    background-color: #ecf9f8b3;
+    margin: 0;
+    padding: 0;
+}
+.de-container {
+    margin-top: 15px;
+    margin-left: 10px;
+
+}
+.pp {
+    width: 15em;
+    border-radius: 41px;
+    height: 15em;
+}
+.left {
+    text-align: center;
+    display: block;
+}
+.left a {
+    text-align: center;
+}
+.right {
+    width: 50%;
+    display: table-cell;
+    text-align: center;
+}
+label {
+    color: #0c1c1cf2;
+    font-size: 15px;
+    font-style: oblique;
+}
+.right div h3{
+    padding: 6px;
+    padding-top: 4px;
+    padding-left: 10px;
+    margin-top: 8px;
+    margin-bottom: 25px;
+    color: #011a1af2;
+    font-size: 15px;
+    font-style: normal;
+}
+
+.left h3{
+    padding-left: 10px;
+    color: #011a1af2;
+    font-size: 15px;
+    font-style: normal;
+    margin: 6px;
+}
+.fix {
+    position: fixed;
+}
+h1 {
+        color: #053835e8;
+        margin-left: 40%;
+    }
+@media only screen and (min-width:600px) {
+
+    .c12, .c22, .c32, .c42, .c52, .c62 { margin-left: 40%;    margin-top: -5pc;    margin-right: 31%; }
+    .c13, .c23, .c33, .c43, .c53, .c6 { margin-left: 70%;    margin-top: -5pc; }
+
+    .c11 { margin-left: 1%;     margin-top: 4%;     margin-right: 61%; }
+    .c21 { margin-left: 1%;     margin-top: 4%;     margin-right: 61%; }
+    .c31 { margin-left: 1%;     margin-top: 4%;     margin-right: 61%; }
+    .c41 { margin-left: 1%;     margin-top: 4%;     margin-right: 61%; }
+    .c51 { margin-left: 1%;     margin-top: 4%;     margin-right: 61%; }
+    .c61 { margin-left: 1%;     margin-top: 4%;     margin-right: 61%; }
+
+    .left {
+        text-align: center;
+        display: table-cell;
+        padding-right: 25px;
+    }
+    .right {
+        width: 100%;
+        display: table-cell;
+        text-align: unset;
+    }
+    .fix {
+        position: unset;
+    }
+
+}
+.btn-generate {
+    -webkit-appearance: button;
+    text-align: center;
+    position: absolute;
+    align-items: center;
+    height: 25px;
+    width: 7em;
+    margin-left: 9%;
+    background-color: #5ccbbbd1;
+    font-size: 15px;
+    border-radius: 8px;
+    margin-top: -3pc;
+}

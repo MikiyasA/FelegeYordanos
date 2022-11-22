@@ -1,0 +1,45 @@
+.cont {
+    margin: 30px;
+}
+h1 {
+    color: #011610d9;
+    text-align-last: center;
+}
+.dev {
+    margin-top: 50px;
+    text-align-last: left;
+    width: 40%;
+    margin-left: 40%;
+}
+.about-dev {
+    display: none;
+}
+.btn-ab {
+    background-color: inherit;
+    border: none;
+    font-size: 18px;
+    text-decoration: underline;
+}
+.btn-ab:hover {
+    font-weight: bolder;
+}
+h4 {
+    text-decoration: underline;
+    font-size: 20px;
+    margin: 9px;
+}
+h5 {
+    text-indent: 20px;
+    font-weight: 200;
+    font-size: 18px;
+    margin: 9px;
+}
+.ul-message li {
+    background-color: unset;
+    font-size: 20px;
+    width: 100%;
+    align-content: center;
+    margin-top: 20px;
+    color: #ff0000cf;
+
+}

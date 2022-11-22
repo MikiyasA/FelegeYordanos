@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+{% load crispy_forms_tags %}
+{% load static %}
+{% load custom_tags %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="{% static 'css/book.css' %}?{% now 'U' %}">
+  <link rel="stylesheet" href="{% static 'css/img.css' %}?{% now 'U' %}">
+</head>
+<body>
+{% include 'nav.html' %}
+    <!-- to display message when add and update -->
+{% for message in messages %}
+    <div class="alert">
+        <strong>{{message}}</strong>
+    </div>
+{% endfor %}
+
+<br>
+{% if request.user.is_authenticated %} <!-- to filter out display if not authenticated  -->
+  <div class="btns">
+    <div class="div-add">
+      <a class="btn-add" href="/library/addFile">Add File</a>
+    </div>
+  </div>
+{%endif%}
+
+  <!-- search form -->
+<div class="contain">
+  <div class="filter">
+    <div>
+      <form>
+      <input class="search" id="search" name="q" type="text" placeholder="Search"/>
+      <button class="btn-search" name="submit" type="submit">Search</button>
+      </form>
+    </div>
+    <hr>
+    <div class="import">
+        <form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+            {{form_imp|crispy}}
+            <input class="btn-import" type="submit" value="Import"/>
+        </form>
+    </div>
+  </div>
+
+<!-- to list shelves url 'updateBook' book.book_id  -->
+  <div class="all-cont">
+    {% for file in queryset %}
+    {% if file.file|extn == 'pdf' %}
+    <div class="cont-cntr">
+      <div class="cntr" width="200">
+        <a href="{{ file.file.url }}"><img src="{{ file.cover.url }}" width="200" height="230" alt="Cover" /></a>
+        <a href="{{ file.file.url }}"><lable>{{file.file_name}}</lable></a>
+      </div>
+    </div>
+    {% elif file.file|extn == 'mp3' %}
+    <div class="cont-cntr">
+      <div class="cntr-audio" width="200">
+        {% if file.cover.url != '/media/media/def.jpg' %}
+        <a href="{{ file.file.url }}"><img src="{{ file.cover.url }}" width="200" height="230" alt="Cover" /></a>
+        {% endif %}
+        <audio controls onseeking="True">
+          <source src="{{ file.file.url }}">
+        </audio>
+        <a href="{{ file.file.url }}"><lable>{{file.file_name}}</lable></a>
+      </div>
+    </div>
+   {% elif file.file|extn == 'mp4' %}
+      <div class="cont-cntr">
+      <div class="cntr-video " width="200">
+        {% if file.cover.url != '/media/media/def.jpg' %}
+        <a href="{{ file.file.url }}"><img src="{{ file.cover.url }}" width="200" height="230" alt="Cover" /></a>
+        {% endif %}
+        <video controls>
+          <source src="{{ file.file.url }}">
+        </video>
+        <a href="{{ file.file.url }}"><lable>{{file.file_name}}</lable></a>
+      </div>
+    </div>
+    {% elif file.file|extn == 'jpg' or file.file|extn == 'JPG' or file.file|extn == 'gif' %}
+      <div class="cont-cntr">
+        <img class="myImg" id="myImg{{forloop.counter}}" src="{{ file.file.url }}" alt="image" style="width:100%;max-width:300px;height:13pc">
+        <div id="myModal{{forloop.counter}}" class="modal">
+          <span class="close-img" id="close-img{{forloop.counter}}">&times;</span>
+          <img class="modal-content" id="img01{{forloop.counter}}">
+          <span class="prev" id="prev" onclick="prev()">&#8249;&#8249;</span>
+          <span class="next" id="next" onclick="next()">&#8250;&#8250;</span>
+          <div class="caption" id="caption{{forloop.counter}}"></div>
+        </div>
+        <div class="number">{{forloop.counter}}</div>
+      </div>
+          <script>
+              // Get the modal
+                var link = document.getElementById("link");
+                var modal = document.getElementById("myModal{{forloop.counter}}");
+              // Get the image and insert it inside the modal - use its "alt" text as a caption
+                var img = document.getElementById("myImg{{forloop.counter}}");
+                var modalImg = document.getElementById("img01{{forloop.counter}}");
+                var captionText = document.getElementById("caption{{forloop.counter}}");
+                img.onclick = function() {
+                  modal.style.display = "flex";
+                  modalImg.src = this.src;
+
+                  captionText.innerHTML = this.alt;
+                  link.style.display = "none";
+
+                }
+              // Get the <span> element that closes the modal
+                var span = document.getElementById("close-img{{forloop.counter}}");
+              // When the user clicks on <span> (x), close the modal
+                span.onclick = function() {
+                  modal.style.display = "none";
+                  link.style.display = "flex";
+                  }
+         </script>
+          {% endif %}
+          {% endfor %}
+      <script>
+        var slider_img = document.querySelector('#img0112');
+        var images = [{% for file in queryset %}' {{file.file.url}}', {% endfor %}];
+        var i = 0;
+
+        function prev() {
+            if (i <= 0) {
+            i = images.length;
+            }
+            i--;
+            return slider_img.setAttribute('src', images[i]);
+        }
+        function next() {
+            if (i >= images.length-1) {
+            i = -1;
+            }
+            i++;
+            return slider_img.setAttribute('src', images[i]);
+        }
+        function setImg() {
+            return slider_img.setAttribute('src', images[i]);
+        }
+        </script>
+
+  </div>
+</div>
+
+
+
+</body>
+</html>

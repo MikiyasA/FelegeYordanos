@@ -1,0 +1,28 @@
+body {
+    background-color: #ecf9f8b3;
+    margin: 0;
+    padding: 0;
+}
+
+.login-form {
+    margin-left: 0;
+    margin-top: 6pc;
+    text-align: center;
+}
+
+.login-form  a {
+    color: #0d25dbf2;
+}
+.login-form a:hover {
+    text-decoration-line: underline;
+    font-weight: 100;
+    font-style: oblique;
+}
+span {
+    display: none;
+}
+#input:visited   #span  { display: block; }
+}
+.login-form ul {
+    background-color: #d1e2e0;
+}
