@@ -1,25 +1,64 @@
-{% extends 'index.html' %}
-{% load static %}
 {% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="{% static 'css/book.css' %}?{% now 'U' %}">
+</head>
+<body>
+{% include 'nav.html' %}
+    <!-- to display message when add and update -->
+{% for message in messages %}
+    <div class="alert">
+        <strong>{{message}}</strong>
+    </div>
+{% endfor %}
 
-{% block title %} {{title}} {% endblock %}
+<br>
+{% if request.user.is_authenticated %} <!-- to filter out display if not authenticated  -->
+  <div class="btns">
+    <div class="div-add">
+      {% for f in queryset %}
+      {% if forloop.first %}
+      <a class="btn-add" href="{% url 'addSubFolder' f.parent_key  %}">Add Shelf</a>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  <div class="btns">
+    <div class="div-add">
+      <a class="btn-add" href="/library/addFile">Add File</a>
+    </div>
+  </div>
+{%endif%}
 
-{% block head  %}
-    <link rel="stylesheet" href="{% static 'css/add.css' %}?{% now 'U' %}">
-{% endblock %}
-
-{% block header %} {% include 'nav.html' %} {% endblock %}
-
-{% block content %}
- <!-- forms to add, can be used for book, shelf author or any form -->
-<h2>{{heading}}</h2>
-<div class="form">
-    <form method="POST", enctype="multipart/form-data" action="">{% csrf_token %}
-        <input type="text" name="" >
-        <input class="btn-save" type="submit" value="Save"/>
-    </form>
+  <!-- search form -->
+<div class="contain">
+  <div class="filter">
+    <div>
+      <form>
+      <input class="search" id="search" name="q" type="text" placeholder="Search by all"/>
+      <button class="btn-search" name="submit" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+<!-- to list shelves url 'updateShelf' shelf.shelf_id -->
+  <div class="all-cont">
+    {% for shelf in queryset %}
+    <div class="cont-cntr">
+      <div class="cntr" width="200">
+         <!-- {% if request.user.is_authenticated %}
+        <a href="{% url 'updateShelf' shelf.name %}" class="img-edit"><img src="{% static 'img/edit.svg' %}" width="20px"></a>
+        {%endif%}  -->
+        <a href="{% url 'shelf' shelf.name %}"><img src="{{ shelf.cover.url }}" width="200" height="230" alt="Cover" /></a>
+        <a href="{% url 'shelf' shelf.name %}"><lable>{{shelf.name}}</lable></a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 </div>
+</body>
+</html>
 
-{% endblock %}
-
-{% block footer %} {% include 'footer.html' %} {% endblock %}

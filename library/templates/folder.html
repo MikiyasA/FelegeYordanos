@@ -20,6 +20,12 @@
 {% if request.user.is_authenticated %} <!-- to filter out display if not authenticated  -->
   <div class="btns">
     <div class="div-add">
+      <a class="btn-add" href="{% url 'addFolder' %}">Add Folder</a>
+    </div>
+
+  </div>
+  <div class="btns">
+    <div class="div-add">
       <a class="btn-add" href="/library/addShelf">Add Shelf</a>
     </div>
   </div>
@@ -29,7 +35,6 @@
     </div>
   </div>
 {%endif%}
-
   <!-- search form -->
 <div class="contain">
   <div class="filter">
@@ -40,16 +45,17 @@
       </form>
     </div>
   </div>
-<!-- to list shelves url 'updateShelf' shelf.shelf_id -->
+<!-- to list shelves   url 'updateShelf' shelf.shelf_id  url 'book' shelf.id -->
   <div class="all-cont">
-    {% for shelf in queryset %}
+
+    {% for f in queryset %}
     <div class="cont-cntr">
       <div class="cntr" width="200">
-         <!-- {% if request.user.is_authenticated %}
-        <a href="{% url 'updateShelf' shelf.name %}" class="img-edit"><img src="{% static 'img/edit.svg' %}" width="20px"></a>
+        <!--  {% if request.user.is_authenticated %}
+        <a href="" class="img-edit"><img src="{% static 'img/edit.svg' %}" width="20px"></a>
         {%endif%}  -->
-        <a href="{% url 'shelf' shelf.name %}"><img src="{{ shelf.cover.url }}" width="200" height="230" alt="Cover" /></a>
-        <a href="{% url 'shelf' shelf.name %}"><lable>{{shelf.name}}</lable></a>
+        <a href="{% url 'folders' f.folder_key %}"><img src="{{ f.cover.url }}" width="200" height="230" alt="Cover" /></a>
+        <a href="{% url 'folders' f.folder_key %}"><lable>{{f.name}}</lable></a>
       </div>
     </div>
     {% endfor %}
