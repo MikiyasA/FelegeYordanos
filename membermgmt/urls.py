@@ -15,12 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from membermgmt import views
+from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.homepage, name='homepage'),
+    path('', views.home, name='home'),
+    path('postBlog', views.post_blog, name='postBlog'),
+    path('commentBlog/<str:pk>', views.comment_blog, name='commentBlog'),
+    path('addNotice', views.add_notice, name='addNotice'),
+
+    path('dashboard/', views.dashboard, name='dashboard'),
     path('memberDashboard/', views.mem_dashboard, name='memberDashboard'),
     path('listMembers/', views.list_members, name='listMembers'),
     path('addMembers/', views.add_members, name='addMembers'),

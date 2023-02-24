@@ -16,28 +16,40 @@
 {% if request.user.is_authenticated %}
 <div class="post-btn">
     <div class="div-add">
-        <a class="btn-add" href="/post">Post Blog</a>
+        <a class="btn-add" href="{% url 'postBlog' %}">Post Blog</a>
     </div>
 </div>
 {%endif%}
-<div class="container">
+<div class="blog-container">
     <div class="cont-post">
-        {% for post in queryset %}
+        {% for post in blog %}
         <div class="post">
             <h2>{{post.title}}</h2>
             {% if post.photo.url != null %}
             <img src="{{ post.photo.url }}">
             {% endif %}
-            <p>{{post.description}}</p>
+            <p>{{post.description|safe}}</p>
+            <div class="comment">Comment
+                <a href="{% url 'commentBlog' post.id %}"><img width="10px" class="add" src="{% static 'img/add.png' %}" alt="Add"></a>
+                {% for c in comment %}
+                {% if post.blog_id == c.id %}
+                <div class="list-comment">
+                    <h6>{{c.commentBy.first_name}} {{c.commentBy.last_name}}</h6>
+                    <p>{{comment}}</p>
+                    <span>{{commentDate}}</span>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
         </div>
         {%endfor%}
     </div>
-    <div class="cont-new-book">
-        <h3>New added books</h3>
-        {% for book in bkQueryset %}
-        <div class="new-book">
-            <img src="{{ book.cover.url }}">
-            <label>{{ book.book_name }}</label>
+    <div class="cont-new-notice">
+        <h3>Notices Board <a href="{% url 'addNotice' %}"><img width="20px" class="add" src="{% static 'img/add.png' %}" alt="Add"></a></h3>
+        {% for n in notice %}
+        <div class="new-notice">
+            <h5>{{ n.title }}</h5>
+            <p>{{ n.description }}</p>
         </div>
         {%endfor%}
     </div>

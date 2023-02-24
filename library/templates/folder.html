@@ -1,65 +1,54 @@
+<!DOCTYPE html>
 {% load crispy_forms_tags %}
 {% load static %}
-<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>{{title}}</title>
-  <link rel="stylesheet" href="{% static 'css/book.css' %}?{% now 'U' %}">
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="{% static 'css/folder.css' %}?{% now 'U' %}">
 </head>
 <body>
 {% include 'nav.html' %}
-    <!-- to display message when add and update -->
+<!-- to display message when add and update -->
 {% for message in messages %}
-    <div class="alert">
-        <strong>{{message}}</strong>
-    </div>
+<div class="alert">
+    <strong>{{message}}</strong>
+</div>
 {% endfor %}
 
 <br>
 {% if request.user.is_authenticated %} <!-- to filter out display if not authenticated  -->
-  <div class="btns">
+<div class="btns">
     <div class="div-add">
-      <a class="btn-add" href="{% url 'addFolder' %}">Add Folder</a>
+        <a class="btn-add" href="{% url 'addFolder' %}">ማህደር ይፍጠሩ</a>
     </div>
 
-  </div>
-  <div class="btns">
-    <div class="div-add">
-      <a class="btn-add" href="/library/addShelf">Add Shelf</a>
-    </div>
-  </div>
-  <div class="btns">
-    <div class="div-add">
-      <a class="btn-add" href="/library/addFile">Add File</a>
-    </div>
-  </div>
+</div>
+
 {%endif%}
-  <!-- search form -->
+<!-- search form -->
 <div class="contain">
-  <div class="filter">
-    <div>
-      <form>
-      <input class="search" id="search" name="q" type="text" placeholder="Search by all"/>
-      <button class="btn-search" name="submit" type="submit">Search</button>
-      </form>
+    <div class="filter">
+        <form>
+            <input class="search" id="search" name="q" type="text" placeholder="Search by all"/>
+            <button class="btn-search" name="submit" type="submit">Search</button>
+        </form>
     </div>
-  </div>
-<!-- to list shelves   url 'updateShelf' shelf.shelf_id  url 'book' shelf.id -->
-  <div class="all-cont">
-
-    {% for f in queryset %}
-    <div class="cont-cntr">
-      <div class="cntr" width="200">
-        <!--  {% if request.user.is_authenticated %}
-        <a href="" class="img-edit"><img src="{% static 'img/edit.svg' %}" width="20px"></a>
-        {%endif%}  -->
-        <a href="{% url 'folders' f.folder_key %}"><img src="{{ f.cover.url }}" width="200" height="230" alt="Cover" /></a>
-        <a href="{% url 'folders' f.folder_key %}"><lable>{{f.name}}</lable></a>
-      </div>
+    <div class="all-cont">
+        {% for f in queryset %}
+        <div class="cont-cntr">
+            <div class="cntr" width="200">
+                <img class="folder-icon" src="{% static 'img/folder.svg' %}">
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'updateFolder' f.id %}" class="img-edit"><img src="{% static 'img/edit.svg' %}" width="20px"></a>
+                {%endif%}
+                <a href="{% url 'folders' f.folder_key %}"><img src="{{ f.cover.url }}" width="200" height="230"/></a>
+                <a href="{% url 'folders' f.folder_key %}">                    <lable>{{f.name}}</lable>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-  </div>
 </div>
 </body>
 </html>

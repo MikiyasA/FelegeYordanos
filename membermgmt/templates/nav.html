@@ -3,7 +3,7 @@
 
 <div class="container">
         <div>
-            <div class="logo"><a style="width: fit-content" href="{% url 'homepage' %}"><img class="alogo" src="{% static 'img/logo.jpg' %}" alt="Logo"></a> </div>
+            <div class="logo"><a style="width: fit-content" href="{% url 'dashboard' %}"><img class="alogo" src="{% static 'img/logo.jpg' %}" alt="Logo"></a> </div>
             <img id="id-menu" class="menu" src="{% static 'img/menu.svg' %}" alt="Menu">
         </div>
         <nav>
@@ -12,9 +12,10 @@
 
            <div id="link" class="link">
                 <ul class="primary">
+                    <li><a href="/">Home</a></li>
                     {% for group in request.user.groups.all %}
                     {% if group.name == "amerar" %}
-                    <li><a href="/">Dashbord</a></li>
+                    <li><a href="{% url 'dashboard' %}">Dashbord</a></li>
                     {% endif %}
                     {% endfor %}
                     {% for group in request.user.groups.all %}
@@ -74,8 +75,15 @@
                     </li>
                     {% endif %}
                     {% endfor %}
-                    <li><a href="/library/container">ቤተ መጻህፍት</a>
+                    <li><a href="{% url 'folders' %}">ቤተ መዛግብት</a>
 
+                    </li>
+                    <li><a href="">አገልግሎት</a>
+                        <ul class="sublink">
+                            <li><a href="{% url 'listGedam' %}">ገዳማት</a></li>
+                            <li><a href="{% url 'listGuzo' %}">ጉዞ </a></li>
+                            <li><a href="{% url 'listBooking' %}">ትኬት መቁረጥ</a></li>
+                        </ul>
                     </li>
                     <li><a href="">ፈቃድ</a>
                         <ul class="sublink">

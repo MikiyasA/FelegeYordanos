@@ -49,7 +49,7 @@ ul.primary{
     text-decoration: none;
 
 }
-ul, li{
+.container ul, .container li{
     list-style-type: none;
 }
 .close{
@@ -82,7 +82,7 @@ footer {
     .menu, .close {
         display: none;
     }
-    nav {
+    .container nav {
         display: flex;
         margin-top: 0px;
         left: 61px;
@@ -100,18 +100,18 @@ footer {
         width: 100%;
     }
   
-     ul.primary{
+     .container ul.primary{
             display: inherit;
             margin-top: 0px;
             margin-left: 15%;
             width: 100%;
             padding: 0;
     }
-    ul, li {
+    .container ul, .container li {
         list-style-type: none;
         width: 135%;
     }
-    ul li{
+    .container ul li{
         float: left;
         width: inherit;
         height: 20px;
@@ -124,12 +124,12 @@ footer {
         justify-items: center;
         
     }
-    ul li ul li {
+    .container ul li ul li {
         display: none;
         width: 100%;
 
     }
-    ul li:hover ul li {
+    .container ul li:hover ul li {
         display: block;
         padding: 7px;
         width: 100%;

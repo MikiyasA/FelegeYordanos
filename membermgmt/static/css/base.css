@@ -6,8 +6,40 @@ body {
 
 .login-form {
     margin-left: 0;
-    margin-top: 6pc;
+    margin-top: 3pc;
     text-align: center;
+}
+.login-form form {
+    display: grid;
+    justify-items: center;
+ }
+.login-form ul {
+    width: auto;
+    display: grid;
+    justify-items: start;
+    justify-content: center;
+    margin: 0;
+}
+.login-form li {
+    background-color: unset;
+    padding: 0;
+    padding-left: 7pc
+    font-size: 12px;
+}
+.login-form p {
+    display: inline-grid;
+    justify-items: start;
+    margin: 5px;
+    margin-bottom: 0;
+}
+.login-form input {
+    padding: 3px;
+    margin: 5px 30px;
+    border-radius: 5px;
+    border: ridge 1px;
+}
+.errorlist {
+    color: red;
 }
 
 .login-form  a {

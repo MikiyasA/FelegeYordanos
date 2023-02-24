@@ -213,4 +213,19 @@ class BlogCreateForm(forms.ModelForm):
     """A class to create form for Blog"""
     class Meta:
         model = Blog
-        fields = ['title', 'description', 'photo']
+        fields = '__all__'
+        exclude = ('postDate', 'createdBy')
+
+
+class BlogCommentForm(forms.ModelForm):
+    class Meta:
+        model = BlogComment
+        fields = ['comment', 'blog']
+        exclude = ('blog',)
+
+
+class NoticeForm(forms.ModelForm):
+    class Meta:
+        model = Notice
+        fields = ['title', 'description', 'expiredDate']
+        widgets = {'expiredDate': DatePicker()}

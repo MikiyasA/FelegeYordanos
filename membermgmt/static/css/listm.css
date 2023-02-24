@@ -10,8 +10,11 @@ body {
 }
 .tbl-title {
     margin-top: 5px;
-    display: flex;
+    display: grid;
     justify-content: center;
+    align-items: center;
+    justify-items: center;
+    align-content: center;
 }
 .tbl-title h1 {
     color: #053835e8;
@@ -116,8 +119,7 @@ input {
 }
 .ul-message {
     display: flex;
-    width: 86%;
-    margin-left: -7%;
+    width: fit-content;
 }
 .ul-message li {
     list-style: none;
@@ -126,9 +128,8 @@ input {
     text-align: center;
     height: fit-content;
     font-size: 20px;
-    padding: 5px;
-    margin-left: -24%;
-    border-radius: 50%;
+    padding: 21px 45px;
+    border-radius: 45%;
 }
 h1 {
     color: #053835e8;

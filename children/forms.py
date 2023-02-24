@@ -22,12 +22,12 @@ class ChildCreateForm(forms.ModelForm):
                   'dikuna', 'photo']
         widgets = {'bday': DatePicker(), 'start_date': DatePicker()}
 
-    def clean_idno(self):
+    """def clean_idno(self):
         idno = self.cleaned_data.get('idno')
         for instance in Child.objects.all():
             if instance.idno == idno:
                 raise forms.ValidationError("መለያ ቁጥር  " + idno + " ቀድሞ ተይዙአል")
-        return idno
+        return idno"""
 
 
 class CsvModelForm(forms.ModelForm):

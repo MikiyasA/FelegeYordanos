@@ -1,5 +1,6 @@
 import datetime
 
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 from registration.forms import User
 
@@ -213,6 +214,23 @@ class Comment(models.Model):
 class Blog(models.Model):
     """ Class to post blog """
     title = models.CharField(max_length=100, blank=False, null=True)
-    description = models.CharField(max_length=10000, blank=False, null=True)
+    description = RichTextUploadingField(blank=True, null=True)
     photo = models.ImageField(upload_to='media', blank=True, null=True)
-    post_date = models.DateTimeField(auto_now_add=True, auto_now=False, blank=False, null=True)
+    postDate = models.DateTimeField(auto_now_add=True, auto_now=False, blank=False, null=True)
+    createdBy = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
+
+
+class BlogComment(models.Model):
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    comment = models.CharField(max_length=1000)
+    commentBy = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    commentDate = models.DateTimeField(auto_now_add=True)
+
+
+class Notice(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.CharField(max_length=1000)
+    createdDate = models.DateTimeField(auto_now_add=True)
+    expiredDate = models.DateField(blank=False)
+    updatedDate = models.DateField(auto_now=True)
+    createBy = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)

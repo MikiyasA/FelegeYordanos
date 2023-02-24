@@ -289,5 +289,15 @@ div [id="div_id_photo"]{
     display: block;
 }
 .errorlist {
-    background: #ffffff;
+    display: none;
+    background-color: unset;
+    color: red;
+    width: unset;
+}.errorlist li{
+    background: unset;
+    display: flex;
+    font-size: 14px;
+}
+.heading {
+    text-align-last: center;
 }

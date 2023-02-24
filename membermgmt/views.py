@@ -25,7 +25,7 @@ from dateutil.relativedelta import relativedelta
 
 @login_required
 @allowed_users('amerar', 'admin')
-def homepage(request):
+def dashboard(request):
     title = 'Home Page'
     allM = Members.objects.all().count()
     male = Members.objects.filter(sex__contains='ወንድ').count()
@@ -831,10 +831,13 @@ def footer(request):
 def home(request):
     """A function to render the view of home page including post and last added books"""
     title = 'Home'
-    queryset = Blog.objects.order_by('-post_date')[:30]
+    today = datetime.date.today()
+    blog = Blog.objects.order_by('-postDate')[:30]
+    notice = Notice.objects.all().exclude(expiredDate__lt=today)
     context = {
         'title': title,
-        'queryset': queryset,
+        'blog': blog,
+        'notice': notice
     }
     return render(request, "home.html", context)
 
@@ -852,3 +855,35 @@ def post_blog(request):
         'form': form
     }
     return render(request, "add.html", context)
+
+
+def comment_blog(request, pk):
+    title = "Comment Blog"
+    form = BlogCommentForm(request.POST)
+    if form.is_valid():
+        data = form.save(commit=False)
+        print(data)
+        data.commentBy_id = request.user.id
+        data.blog_id = pk
+        data.save()
+        messages.success(request, "You commented")
+        return redirect('/')
+    context = {
+        'title': title,
+        'form': form
+    }
+    return render(request, 'add.html', context)
+
+
+def add_notice(request):
+    title = "Add notice"
+    form = NoticeForm(request.POST)
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Notice Added")
+        return redirect('/')
+    context = {
+        'title': title,
+        'form': form
+    }
+    return render(request, 'add.html', context)

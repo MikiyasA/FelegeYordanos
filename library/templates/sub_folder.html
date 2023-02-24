@@ -1,11 +1,13 @@
+<!DOCTYPE html>
 {% load crispy_forms_tags %}
 {% load static %}
-<!DOCTYPE html>
+{% load custom_tags %}
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>{{title}}</title>
-  <link rel="stylesheet" href="{% static 'css/book.css' %}?{% now 'U' %}">
+  <link rel="stylesheet" href="{% static 'css/folder.css' %}?{% now 'U' %}">
+  <link rel="stylesheet" href="{% static 'css/img.css' %}?{% now 'U' %}">
 </head>
 <body>
 {% include 'nav.html' %}
@@ -20,16 +22,12 @@
 {% if request.user.is_authenticated %} <!-- to filter out display if not authenticated  -->
   <div class="btns">
     <div class="div-add">
-      {% for f in queryset %}
-      {% if forloop.first %}
-      <a class="btn-add" href="{% url 'addSubFolder' f.parent_key  %}">Add Shelf</a>
-      {% endif %}
-      {% endfor %}
+      <a class="btn-add" href="{% url 'addSubFolder' pk  %}">አዲስ ማህደር</a>
     </div>
   </div>
   <div class="btns">
     <div class="div-add">
-      <a class="btn-add" href="/library/addFile">Add File</a>
+      <a class="btn-add" href="{% url 'addFile' pk  %}">አዲስ ፋይል</a>
     </div>
   </div>
 {%endif%}
@@ -45,18 +43,121 @@
     </div>
   </div>
 <!-- to list shelves url 'updateShelf' shelf.shelf_id -->
+  <div>
   <div class="all-cont">
-    {% for shelf in queryset %}
+    {% for sf in queryset %}
     <div class="cont-cntr">
       <div class="cntr" width="200">
-         <!-- {% if request.user.is_authenticated %}
-        <a href="{% url 'updateShelf' shelf.name %}" class="img-edit"><img src="{% static 'img/edit.svg' %}" width="20px"></a>
-        {%endif%}  -->
-        <a href="{% url 'shelf' shelf.name %}"><img src="{{ shelf.cover.url }}" width="200" height="230" alt="Cover" /></a>
-        <a href="{% url 'shelf' shelf.name %}"><lable>{{shelf.name}}</lable></a>
+      <img class="folder-icon" src="{% static 'img/folder.svg' %}">
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'updateFolder' sf.id %}" class="img-edit"><img src="{% static 'img/edit.svg' %}" width="20px"></a>
+        {%endif%}
+        <a href="{% url 'folders' sf.folder_key %}"><img src="{{ sf.cover.url }}" width="200" height="230" alt="Cover" /></a>
+        <a href="{% url 'folders' sf.folder_key %}"><lable>{{sf.name}}</lable></a>
       </div>
     </div>
     {% endfor %}
+  </div>
+
+  <div class="all-cont">
+    {% for file in f_queryset %}
+    {% if file.file|extn == 'pdf' %}
+    <div class="cont-cntr">
+      <div class="cntr" width="200">
+        <a href="{{ file.file.url }}"><img src="{{ file.cover.url }}" width="200" height="230" alt="Cover" /></a>
+        <a href="{{ file.file.url }}"><lable>{{file.file_name}}</lable></a>
+      </div>
+    </div>
+    {% elif file.file|extn == 'mp3' %}
+    <div class="cont-cntr">
+      <div class="cntr-audio" width="200">
+        {% if file.cover.url != '/media/media/def.jpg' %}
+        <a href="{{ file.file.url }}"><img src="{{ file.cover.url }}" width="200" height="230" alt="Cover" /></a>
+        {% endif %}
+        <audio controls onseeking="True">
+          <source src="{{ file.file.url }}">
+        </audio>
+        <a href="{{ file.file.url }}"><lable>{{file.file_name}}</lable></a>
+      </div>
+    </div>
+   {% elif file.file|extn == 'mp4' %}
+      <div class="cont-cntr">
+      <div class="cntr-video " width="200">
+        {% if file.cover.url != '/media/media/def.jpg' %}
+        <a href="{{ file.file.url }}"><img src="{{ file.cover.url }}" width="200" height="230" alt="Cover" /></a>
+        {% endif %}
+        <video controls>
+          <source src="{{ file.file.url }}">
+        </video>
+        <a href="{{ file.file.url }}"><lable>{{file.file_name}}</lable></a>
+      </div>
+    </div>
+    {% elif file.file|extn == 'jpg' or file.file|extn == 'JPG' or file.file|extn == 'gif' or file.file|extn == 'jpeg' or file.file|extn == 'png'  %}
+      <div class="cont-cntr">
+        <div class="cntr" width="200">
+        <img class="myImg" id="myImg{{forloop.counter}}" src="{{ file.file.url }}" alt="image" style="width:100%;max-width:300px;height:13pc">
+        <div id="myModal{{forloop.counter}}" class="modal">
+          <span class="close-img" id="close-img{{forloop.counter}}">&times;</span>
+          <img class="modal-content" id="img01{{forloop.counter}}">
+          <span class="prev" id="prev" onclick="prev()">&#8249;&#8249;</span>
+          <span class="next" id="next" onclick="next()">&#8250;&#8250;</span>
+          <div class="caption" id="caption{{forloop.counter}}"></div>
+        </div>
+        <div class="number">{{forloop.counter}}</div>
+      </div>
+      </div>
+          <script>
+              // Get the modal
+                var link = document.getElementById("link");
+                var modal = document.getElementById("myModal{{forloop.counter}}");
+              // Get the image and insert it inside the modal - use its "alt" text as a caption
+                var img = document.getElementById("myImg{{forloop.counter}}");
+                var modalImg = document.getElementById("img01{{forloop.counter}}");
+                var captionText = document.getElementById("caption{{forloop.counter}}");
+                img.onclick = function() {
+                  modal.style.display = "flex";
+                  modalImg.src = this.src;
+
+                  // captionText.innerHTML = this.alt;
+                  link.style.display = "none";
+
+                }
+              // Get the <span> element that closes the modal
+                var span = document.getElementById("close-img{{forloop.counter}}");
+              // When the user clicks on <span> (x), close the modal
+                span.onclick = function() {
+                  modal.style.display = "none";
+                  link.style.display = "flex";
+                  }
+         </script>
+          {% endif %}
+      <script>
+        var slider_img = document.querySelector('#img01{{forloop.counter}}');
+        var images = [{% for file in f_queryset %} '{{file.file.url}}', {% endfor %}];
+        var i = 0;
+
+        function prev() {
+            if (i <= 0) {
+            i = images.length;
+            }
+            i--;
+            console.log(images[i]);
+            return slider_img.setAttribute('src', images[i]);
+        }
+        function next() {
+            if (i >= images.length-1) {
+            i = -1;
+            }
+            i++;
+            return slider_img.setAttribute('src', images[i]);
+        }
+        function setImg() {
+            return slider_img.setAttribute('src', images[i]);
+        }
+        </script>
+          {% endfor %}
+
+  </div>
   </div>
 </div>
 </body>

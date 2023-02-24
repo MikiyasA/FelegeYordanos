@@ -47,7 +47,7 @@
 
 <!-- to list shelves url 'updateBook' book.book_id  -->
   <div class="all-cont">
-    {% for file in queryset %}
+    {% for file in f_queryset %}
     {% if file.file|extn == 'pdf' %}
     <div class="cont-cntr">
       <div class="cntr" width="200">
@@ -119,7 +119,7 @@
           {% endfor %}
       <script>
         var slider_img = document.querySelector('#img0112');
-        var images = [{% for file in queryset %}' {{file.file.url}}', {% endfor %}];
+        var images = [{% for file in f_queryset %}' {{file.file.url}}', {% endfor %}];
         var i = 0;
 
         function prev() {

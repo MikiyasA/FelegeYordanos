@@ -1,5 +1,5 @@
 .post-btn {
-  margin-top: 4pc;
+  margin-top: 2pc;
   display: inline-flex;
   align-items: center;
 }
@@ -12,18 +12,16 @@
   color: black;
   padding: 5px 15px;
 }
-.container {
+.blog-container {
     display: flex;
-    background-color: #cfcbc259;
     border-radius: 10px;
-    margin-top: 23px;
+    margin-top: 5px;
 }
 
 .cont-post {
-    width: 70%;
-    margin-top: 23px;
-    margin-left: 21px;
-
+    width: 65%;
+    margin: 20px 50px;
+    margin-right: 5px;
 }
 .post {
     display: grid;
@@ -44,36 +42,51 @@
 .post p {
     text-align: justify;
     padding: 3px 5px;
-    background-color: #cfcbc273;
     border-radius: 12px;
 }
 
-.cont-new-book {
-    width: 25%;
-    border-radius: 25px;
-    margin-left: 30px;
-    border-left: solid 1px;
+.cont-new-notice {
+    width: 35%;
+    margin-left: 10px;
 }
-.new-book {
+.new-notice {
     display: grid;
-    justify-items: center;
     align-items: center;
     align-content: center;
-    justify-content: start;
-    margin-left: 20px;
+    margin: 0 20px;
 }
-.new-book label {
+.new-notice h5 {
+    margin: 8px 5px;
+    font-size: 17px;
+}
+.new-notice p {
+    margin: 8px 0;
+    font-size: 15px;
+}
+.new-notice label {
     text-align: start;
     font-size: 14px;
     width: 100%;
 }
-.new-book  img {
+.new-notice  img {
     width: 70%;
     justify-self: start;
 }
-.cont-new-book h3{
+.cont-new-notice h3{
     margin: 10px;
     text-align: start;
     color: #625f55;
     font-style: oblique;
+}
+.comment {
+    justify-self: start;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-style: italic;
+}
+.comment img {
+    width: 20px;
+    margin-left: 15px;
 }

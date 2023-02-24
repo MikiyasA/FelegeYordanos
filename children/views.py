@@ -116,16 +116,20 @@ def add_child(request):
 @login_required
 @allowed_users('hitsanat', 'admin')
 def update_child(request, pk):
+    url = request.META.get('HTTP_REFERER')
+    print(url)
     queryset = Child.objects.get(idno=pk)
     form = ChildCreateForm(instance=queryset)
     if request.method == 'POST':
         form = ChildCreateForm(request.POST, request.FILES, instance=queryset)
+        print(form.errors)
         if form.is_valid():
             form.save()
             messages.success(request, "የህጻኑ መረጃ ተስተካክሉል")
             return redirect('/memberDetail/' + queryset.idno)
     context = {
-        'form': form
+        'form': form,
+        'heading': "የህጻናት መረጃ ማስተካከልያ"
     }
     return render(request, "addc.html", context)
 

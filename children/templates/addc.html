@@ -12,6 +12,7 @@
 {% include 'nav.html' %}
     <!-- forms to add, can be used for book, shelf author or any form -->
 <h2 class="heading">{{heading}}</h2>
+    <div>{{form.errors}}</div>
 <div class="form">
     <form method="POST", enctype="multipart/form-data" action="">{% csrf_token %}
         {{form|crispy}}

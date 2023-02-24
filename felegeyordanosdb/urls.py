@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from membermgmt import views
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -24,6 +23,11 @@ urlpatterns = [
     path('', include('membermgmt.urls')),
     path('library/', include('library.urls')),
     path('children/', include('children.urls')),
+    path('agelglot/', include('agelglot.urls')),
+
+    path('accounts/', include('registration.backends.default.urls')),
+
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
 if settings.DEBUG:

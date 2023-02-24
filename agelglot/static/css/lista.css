@@ -1,0 +1,57 @@
+.gedam{
+    padding: 15px;
+}
+.gedam-div {
+    display: inline-block;
+    border: ridge 1px;
+    border-radius: 11px;
+    width: 42%;
+    margin: 10px;
+    text-align: -webkit-center;
+}
+.days {
+    font-size: 8px;
+    color: #6e6e65;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 5px 10px;
+}
+.created {    justify-self: self-start;}
+.updated {    justify-self: self-end;}
+
+.gedam-div .title{
+    font-size: 23px;
+    font-weight: 900;
+    color: #235d59;
+    text-align: -webkit-center;
+}
+.gedam-div .detail{
+    font-size: 20px;
+    font-weight: 200;
+    font-variant-caps: all-petite-caps;
+}
+
+.form form {
+    margin: 60px;
+    display: grid;
+    align-items: center;
+    grid-template-columns: unset;
+}
+.form div {
+    padding: 5px;
+    width: 99% !important;
+}
+.filter h3 {
+    margin: 10px;
+}
+.checkboxes {margin: 10px;}
+.checkboxes input {
+    height: unset;
+    width: unset;
+    margin-right: 10px;
+}
+.cover {
+    height: 15vmax;
+    width: 31vmax;
+    border-radius: 5px;
+}

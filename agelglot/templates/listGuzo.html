@@ -1,0 +1,73 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block head  %}
+<link rel="stylesheet" href="{% static 'css/listm.css' %}?{% now 'U' %}">
+{% endblock %}
+
+{% block header %} {% include 'nav.html' %} {% endblock %}
+
+{% block content %}
+
+<div class="tbl-title">
+    <div class="message">
+        {% if messages %}
+        <ul class="ul-message">
+            {% for message in messages %}
+            <li {% if message.tag %} class="{{ message.tag }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <h1>Guzo ዝርዝር
+        <a href="{% url 'createGuzo' %}"><img class="add" src="{% static 'img/add.png' %}" alt="Add"></a>
+    </h1>
+</div>
+
+<div class="t-container">
+
+    <div class="search-col">
+        <div class="div-search">
+            <form>
+                <label for="search">መፈለጊያ</label>
+                <input type="text" name="q" id="search" class="search" placeholder="**** ...">
+                <button class="btn-search" name="submit" type="submit">ፈልግ</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="table-cont">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ተ.ቁ</th>
+                <th>ስም</th>
+                <th>wede</th>
+                <th>waga</th>
+                <th>menesha</th>
+                <th>memelesha</th>
+                <th>edit</th>
+                <th>book</th>
+            </tr>
+            </thead>
+            {% for g in guzo %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td><a href="{% url 'detail' name='guzo' pk=g.id %}">{{g.name}}</a></td>
+                <td><a href="{% url 'detail' name='gedam' pk=g.to.id %}">{{g.to}}</a></td>
+                <td>{{g.price}}</td>
+                <td>{{g.departure_date}} G.C</td>
+                <td>{{g.arrival_date}} G.C</td>
+                <td><a href="{% url 'updateGuzo' g.id %}">edit</a></td>
+                <td><a href="{% url 'bookGuzoId' g.id %}">book</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %} {% include 'footer.html' %} {% endblock %}

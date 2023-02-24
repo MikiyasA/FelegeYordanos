@@ -104,7 +104,7 @@
     color: #0aabe9e8;
 }
 .cntr img {
-  margin-bottom: 7px;
+  margin-bottoma: 7px;
   border-radius: 8px;
 }
 .cntr-audio audio {
@@ -140,4 +140,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.folder-icon {
+    width: 45px;
+    position: absolute;
+    justify-self: baseline;
+    mix-blend-mode: hard-light;
 }

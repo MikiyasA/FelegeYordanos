@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block head  %}
+<link rel="stylesheet" href="{% static 'css/detaila.css' %}?{% now 'U' %}">
+{% endblock %}
+
+{% block header %} {% include 'nav.html' %} {% endblock %}
+
+{% block content %}
+<div>
+    {% if gedam %}
+    <div class="gedam">
+        <h2>{{gedam.name}}</h2>
+        <p class="address">{{gedam.address}}</p>
+        <p class="detail">{{gedam.detail|safe}}</p>
+    </div>
+    {% endif %}
+
+    {% if guzo %}
+    <div class="guzo">
+        <h3>{{guzo.name}}</h3>
+        <h3>{{guzo.to}}</h3>
+        <h5>{{guzo.price}}</h5>
+        <h5>Menesha {{guzo.departure_date}}</h5>
+        <h5>Medresha {{guzo.arrival_date}}</h5>
+    </div>
+    {% endif %}
+
+    {% if booking %}
+    {{booking}}
+    {% endif %}
+
+</div>
+{% endblock %}
+
+{% block footer %} {% include 'footer.html' %} {% endblock %}
